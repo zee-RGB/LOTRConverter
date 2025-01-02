@@ -11,6 +11,9 @@ struct ContentView: View {
     
     @State private var infoScreen = false
     
+    @State var leftSideAmount = ""
+    @State var rightSideAmount = ""
+    
     var body: some View {
         ZStack {
             //Background Image
@@ -19,12 +22,11 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             VStack() {
-                //Prancing Horse Image
+                //Prancing Pony Image
                 Image(.prancingpony)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 200)
-
                 
                 //Currency Title
                 Text("Currency Exchange")
@@ -32,7 +34,7 @@ struct ContentView: View {
                     .foregroundStyle(.white)
                 
                 HStack{
-                    //Left & right conversion
+                    //Left side
                     VStack{
                         HStack {
                             Image(.silverpiece)
@@ -43,9 +45,11 @@ struct ContentView: View {
                                 .font(.headline)
                                 .foregroundStyle(.white)
                         }
+                        .padding(.bottom, -5)
+                        
                         //TextField()
-                        Text("TextField()")
-                            .foregroundStyle(.white)
+                        TextField("Amount", text: $leftSideAmount)
+                            .textFieldStyle(.roundedBorder)
                     }
                     
                     //Equal sign
@@ -53,9 +57,9 @@ struct ContentView: View {
                         .font(.largeTitle)
                         .foregroundStyle(.white)
                         .symbolEffect(.pulse)
-                        .padding()
+                        .padding(5)
                     
-                    
+                    //right side
                     VStack{
                         HStack {
                             Text("Gold penny")
@@ -66,13 +70,18 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .frame(height: 33)
                         }
+                        .padding(.bottom, -5)
+
                         //TextField()
-                        Text("TextField()")
-                            .foregroundStyle(.white)
+                        TextField("Amount", text: $rightSideAmount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
                     }
                 }
-                
-                
+                .padding()
+                .background(.black.opacity(0.5))
+                .clipShape(.capsule)
+                                
                 Spacer()
                 
                 HStack{
@@ -88,13 +97,10 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
-
                 }
                 
             }
-            .padding()
         }
-        
     }
 }
 
