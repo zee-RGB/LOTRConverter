@@ -90,7 +90,6 @@ struct ContentView: View {
                     //Info Button
                     Button {
                         infoScreen.toggle()
-                        print(infoScreen)
                     } label: {
                         Image(systemName: "info.circle.fill")
                             .font(.largeTitle)
