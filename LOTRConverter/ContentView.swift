@@ -96,6 +96,9 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
+                    .sheet(isPresented: $infoScreen) {
+                        ExchangeInfoView()
+                    }
                 }
                 
             }

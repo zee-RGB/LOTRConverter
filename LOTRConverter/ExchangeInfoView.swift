@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ExchangeInfoView: View {
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ZStack{
             Image(.parchment)
                 .resizable()
                 .ignoresSafeArea()
-                .background(.brown)
+                .background(.brown.mix(with: .black, by: 0.3))
             
             VStack (spacing: 15){
                 //Title
@@ -39,7 +41,7 @@ struct ExchangeInfoView: View {
                 
                 //Button
                 Button {
-                    
+                    dismiss()
                 } label: {
                     Text("Done")
                         .frame(width: 80, height: 50)
