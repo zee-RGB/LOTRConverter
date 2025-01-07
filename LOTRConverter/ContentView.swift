@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var infoScreen = false
+    @State private var showInfoScreen = false
+    @State private var showSelectCurrency = false
     
     @State var leftSideAmount = ""
     @State var rightSideAmount = ""
     
     @State var leftCurrency: Currency = .silverPiece
-    @State var rightCurrency: Currency = .goldPenny
+    @State var rightCurrency: Currency = .goldPiece
     
     var body: some View {
         ZStack {
@@ -49,6 +50,12 @@ struct ContentView: View {
                                 .foregroundStyle(.white)
                         }
                         .padding(.bottom, -5)
+                        .onTapGesture {
+                                showSelectCurrency.toggle()
+                            }
+                        .sheet(isPresented: $showSelectCurrency) {
+                            SelectCurrency(topCurrency: $leftCurrency, bottomCurrency: $rightCurrency)
+                        }
                         
                         //TextField()
                         TextField("Amount", text: $leftSideAmount)
@@ -74,6 +81,10 @@ struct ContentView: View {
                                 .frame(height: 33)
                         }
                         .padding(.bottom, -5)
+                        .onTapGesture {
+                            showSelectCurrency.toggle()
+                        }
+
 
                         //TextField()
                         TextField("Amount", text: $rightSideAmount)
@@ -92,14 +103,14 @@ struct ContentView: View {
                     
                     //Info Button
                     Button {
-                        infoScreen.toggle()
+                        showInfoScreen.toggle()
                     } label: {
                         Image(systemName: "info.circle.fill")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
-                    .sheet(isPresented: $infoScreen) {
+                    .sheet(isPresented: $showInfoScreen) {
                         ExchangeInfoView()
                     }
                 }
