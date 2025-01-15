@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IconGrid: View {
     
+    //Binded by SelectCurrency (binded) variables, which are binded by the ContentView state variables
     @Binding var currency: Currency
 
     var body: some View {

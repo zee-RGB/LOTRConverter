@@ -18,6 +18,9 @@ struct ContentView: View {
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency: Currency = .goldPiece
     
+    @FocusState var leftTyping
+    @FocusState var rightTyping
+    
     var body: some View {
         ZStack {
             //Background Image
@@ -60,6 +63,12 @@ struct ContentView: View {
                         //TextField()
                         TextField("Amount", text: $leftSideAmount)
                             .textFieldStyle(.roundedBorder)
+                            .focused($leftTyping)
+                            .onChange(of: leftSideAmount) {
+                                if leftTyping {
+                                    rightSideAmount = leftCurrency.convert(from: leftSideAmount, to: rightCurrency)
+                                }
+                            }
                     }
                     
                     //Equal sign
@@ -90,6 +99,12 @@ struct ContentView: View {
                         TextField("Amount", text: $rightSideAmount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
+                            .focused($rightTyping)
+                            .onChange(of: rightSideAmount) {
+                                if rightTyping {
+                                    leftSideAmount = rightCurrency.convert(from: rightSideAmount, to: leftCurrency)
+                                }
+                            }
                     }
                 }
                 .padding()

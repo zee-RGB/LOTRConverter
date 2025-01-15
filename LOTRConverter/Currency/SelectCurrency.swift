@@ -11,6 +11,7 @@ struct SelectCurrency: View {
     
     @Environment(\.dismiss) var dismiss
     
+    //Binded by ContentView state variables
     @Binding var topCurrency: Currency
     @Binding var bottomCurrency: Currency
 
